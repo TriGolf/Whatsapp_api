@@ -8,6 +8,10 @@ Sélénium et pyperclip
 pip install selenium
 pip install pyperclip
 ```
+Sur linux, il m'a aussi fallu installer xclip et redémarrer mon ordi
+```
+sudo apt install xclip
+```
 
 # Utilisation :
 Assurez vous que le programme est dans votre répertoire puis ajoutez
