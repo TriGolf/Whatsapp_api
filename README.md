@@ -1,6 +1,14 @@
 # Whatsapp_api
 Une api pour whatsapp
 
+# Dépendances :
+
+Sélénium et pyperclip
+```
+pip install selenium
+pip install pyperclip
+```
+
 # Utilisation :
 Assurez vous que le programme est dans votre répertoire puis ajoutez
 ```python
