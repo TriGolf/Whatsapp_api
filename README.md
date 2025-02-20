@@ -31,7 +31,7 @@ Le paramètre service sert à insérer le chemin vers le geckodriver (disponible
 Le paramètre headless (par défaut sur False) vous permet, s'il est mis sur True, de lancer votre code sans ouvrir de fenêtre firefox.
 ***Je vous conseille néanmoins de le mettre sur False pour tester et débugger votre code afin de voir ce qui se passe***
 
-Le paramètre control_key (par défaut sur Keys.CONTROL) sert à définir la touche pour faire le controle+v (Changez à Keys.COMMAND si vous êtes sur mac)
+Le paramètre control_key (par défaut sur "CONTROL") sert à définir la touche pour faire le controle+v (Changez à "COMMAND" si vous êtes sur mac)
 
 Avant d'envoyer et lire les messages, vous devez sélectionner le contact :
 ```python
