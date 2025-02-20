@@ -7,7 +7,7 @@ import time
 import pyperclip
 
 class Whatsapp :
-    def __init__(self, service=None, headless=False) :
+    def __init__(self, service=None, headless=False, control_key = Keys.CONTROL) :
         if service :
             self.service = webdriver.FirefoxService(service)
         else :
@@ -15,6 +15,7 @@ class Whatsapp :
         
         self.options = webdriver.FirefoxOptions()
         self.options.set_preference('intl.accept_languages', 'en-GB')
+        self.control_key = control_key
         if headless :
             self.options.add_argument('--headless')
         self.driver = webdriver.Firefox(options=self.options,service=self.service)
@@ -31,7 +32,7 @@ class Whatsapp :
             button.click()
             return
         
-        self.new_chat = self.driver.find_element(By.XPATH,'//div[@title="New chat" and @role="button"]')
+        self.new_chat = self.driver.find_element(By.XPATH,'//button[@title="New chat" and @role="button"]')
         self.new_chat.click()
 
         self.selec_contact = self.driver.find_element(By.XPATH,'//div[@class="x1hx0egp x6ikm8r x1odjw0f x6prxxf x1k6rcq7 x1whj5v"]')
@@ -50,7 +51,7 @@ class Whatsapp :
         pyperclip.copy(message)
 
         print("ecrit")
-        self.div.send_keys(Keys.CONTROL,'v')
+        self.div.send_keys(self.control_key,'v')
         self.div.send_keys(Keys.ENTER)
         time.sleep(1)
     
