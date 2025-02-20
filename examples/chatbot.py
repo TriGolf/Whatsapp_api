@@ -1,11 +1,18 @@
-import whatsapp_api
+# Ce code connecte l'api de groq à whatsapp (un groupe ou vous même)
+# Les commandes /1, /2, /3 vous permettent de changer de modèle et la commande /reset de rénitialiser la mémoire du modèle
+from whatsapp_api import Whatsapp
+from groq import Groq
 
 model = "mixtral-8x7b-32768"
 prompt_system = "Tu est un assistant par messages whatsapp qui parle en français et s'appelle François. Tu peux donc utiliser les mises en formes proposées par whatsapp (tu peux encadrer une ligne par * pour mettre le texte en gras,` pour mettre le style \"code\", etc...). Tu ne dois pas commencer tes messages par @"
 client = Groq(api_key='Votre api key')
-what = Whatsapp(service='geckodriver (si besoin)',profile='chemin du profile firefox',headless=True)
-what.select('Téléphone ou nom groupe/contact')
-what.send_message("Bonjour, je suis François, votre assistant virtuel.\n comment puis-je vous aider ?")
+
+
+what = Whatsapp(service='geckodriver (si besoin)',headless=True)
+what.select('Téléphone ou nom groupe/contact') # Groupe/contact qui sera connecté à groq (mettez votre propre numéro si vous voulez le connecter à vous même)
+
+
+what.send_message("Bonjour, je suis François, votre assistant virtuel.\n comment puis-je vous aider ?") # Premier message
 messages=[
     {
         "role": "system",
