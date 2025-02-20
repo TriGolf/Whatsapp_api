@@ -7,7 +7,7 @@ import time
 import pyperclip
 
 class Whatsapp :
-    def __init__(self, service=None, headless=False, control_key = Keys.CONTROL) :
+    def __init__(self, service=None, headless=False, control_key = "CONTROL") :
         if service :
             self.service = webdriver.FirefoxService(service)
         else :
@@ -15,7 +15,11 @@ class Whatsapp :
         
         self.options = webdriver.FirefoxOptions()
         self.options.set_preference('intl.accept_languages', 'en-GB')
-        self.control_key = control_key
+        if control_key == "CONTROL" :
+            self.control_key = Keys.CONTROL
+        elif control_key == "COMMAND" :
+            self.control_key = Keys.COMMAND
+
         if headless :
             self.options.add_argument('--headless')
         self.driver = webdriver.Firefox(options=self.options,service=self.service)
