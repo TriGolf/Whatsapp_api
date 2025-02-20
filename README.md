@@ -16,17 +16,19 @@ sudo apt install xclip
 # Utilisation :
 Assurez vous que le programme est dans votre répertoire puis ajoutez
 ```python
-import whatsapp_api
+from whatsapp_api import Whatsapp # Bien penser à mettre whatsapp_api dans le même répertoire que votre programme
 ```
 
 Pour initier le programme faites ensuite
 ```python
-what = Whatsapp(service=None,headless=True")
+what = Whatsapp()
 ```
 
-Notez que dans certains cas il faut installer le geckodriver disponible ici : https://github.com/mozilla/geckodriver/releases et mettre son lien dans le paramètre *service*.
+Il y a deux paramètres optionnels pour la classe Whatsapp : service et headless
 
-Le paramètre headless vous permet, s'il est mis sur True, de ne pas lançer de fenêtre.
+Notez que dans certains cas il faut installer le geckodriver disponible ici : https://github.com/mozilla/geckodriver/releases et mettre chemin dans le paramètre *service*.
+
+Le paramètre headless (par défaut sur False) vous permet, s'il est mis sur True, de lancer votre code sans ouvrir de fenêtre firefox.
 ***Je vous conseille néanmoins de le mettre sur False pour tester et débugger votre code afin de voir ce qui se passe***
 
 Avant d'envoyer et lire les messages, vous devez sélectionner le contact :
