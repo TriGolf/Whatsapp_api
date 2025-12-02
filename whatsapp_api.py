@@ -56,7 +56,7 @@ class Whatsapp :
             button.click()
             return
         
-        self.new_chat = self.driver.find_element(By.XPATH,'//button[@aria-label="New chat"]')
+        self.new_chat = self.driver.find_element(By.XPATH,'//button[@class="html-button xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x178xt8z x1lun4ml xso031l xpilrb4 x1n2onr6 x1ejq31n x18oe1m7 x1sy0etr xstzfhl x1so62im x1syfmzz x1ja2u2z x1s928wv x1j6awrg x4eaejv x1wsn0xg x1r0yslu x2q1x1w xapdjt xr6f91l x5rv0tg x1akc3lz xikp0eg x1xl5mkn x1mfml39 x1l5mzlr xgmdoj8 x1f1wgk5 x1x3ic1u xjbqb8w xuwfzo9 xy0j11r xg268so x1b4bgnk x1wb366y xtnn1bt x9v5kkp xmw7ebm xrdum7p x2lah0s x1lliihq xk8lq53 x9f619 xt8t1vi x1xc408v x129tdwq x15urzxu x1vqgdyp x100vrsf"]')
         self.new_chat.click()
 
         self.selec_contact = self.driver.find_element(By.XPATH,'//div[@class="x1hx0egp x6ikm8r x1odjw0f x6prxxf x1k6rcq7 x1whj5v"]')
@@ -71,7 +71,7 @@ class Whatsapp :
         time.sleep(0.5)
 
     def send_message(self,message) :
-        self.div = self.driver.find_element(By.XPATH,'//div[@aria-placeholder="Type a message"]')
+        self.div = self.driver.find_element(By.XPATH,'//div[@class="x1hx0egp x6ikm8r x1odjw0f x1k6rcq7 x6prxxf"]')
         self.div.click()
         actions = ActionChains(self.driver)
 
@@ -85,7 +85,7 @@ class Whatsapp :
     
     def refresh(self) :
         self.driver.refresh()
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//div[@aria-label="Champ de recherche"]')))
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//div[@class="html-button xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x178xt8z x1lun4ml xso031l xpilrb4 x1n2onr6 x1ejq31n x18oe1m7 x1sy0etr xstzfhl x1so62im x1syfmzz x1ja2u2z x1s928wv x1j6awrg x4eaejv x1wsn0xg x1r0yslu x2q1x1w xapdjt xr6f91l x5rv0tg x1akc3lz xikp0eg x1xl5mkn x1mfml39 x1l5mzlr xgmdoj8 x1f1wgk5 x1x3ic1u xjbqb8w xuwfzo9 xy0j11r xg268so x1b4bgnk x1wb366y xtnn1bt x9v5kkp xmw7ebm xrdum7p x2lah0s x1lliihq xk8lq53 x9f619 xt8t1vi x1xc408v x129tdwq x15urzxu x1vqgdyp x100vrsf"]')))
         self.actual_contact = None
     
     def read_last_messages(self) :
