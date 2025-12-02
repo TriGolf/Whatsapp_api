@@ -3,8 +3,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 import time
-import pyperclip
+import os
+import shutil
 
 class Whatsapp :
     def __init__(self, service=None, headless=False, control_key = "CONTROL") :
@@ -22,12 +24,34 @@ class Whatsapp :
 
         if headless :
             self.options.add_argument('--headless')
+
+        if os.path.exists('profile') :
+            self.options.profile = webdriver.FirefoxProfile('profile')
+
         self.driver = webdriver.Firefox(options=self.options,service=self.service)
         self.wait = WebDriverWait(self.driver,60)
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         self.driver.get("https://web.whatsapp.com")
-        input("Scannez le qr code et appuyez sur entrée")
+
+
+        if not os.path.exists('profile') :
+            input("Scannez le qr code et appuyez sur entrée (vous resterez connecté la prochaine fois)")
+            try :
+                shutil.copytree(src=self.driver.capabilities['moz:profile'], dst='profile')
+                print("Enregistrement des infos de connexions réussie")
+            except :
+                print("Erreur lors de l'enregistrement des données de connexion (cela peut quand même marcher)")
+
+        else :
+            try :
+                self.wait.until(EC.visibility_of_element_located((By.XPATH, '//div[@aria-label="Champ de recherche"]')))
+            except TimeoutError :
+                print("Une erreur est survenue lors de la connexion. Si vous voyez un qr code à l'écran, veuillez supprimer le dossier profile et réessayer")
+        
+
+
+        
     
     def go_to(self,phone) :
 
@@ -36,7 +60,7 @@ class Whatsapp :
             button.click()
             return
         
-        self.new_chat = self.driver.find_element(By.XPATH,'//button[@title="New chat" and @role="button"]')
+        self.new_chat = self.driver.find_element(By.XPATH,'//button[@aria-label="New chat"]')
         self.new_chat.click()
 
         self.selec_contact = self.driver.find_element(By.XPATH,'//div[@class="x1hx0egp x6ikm8r x1odjw0f x6prxxf x1k6rcq7 x1whj5v"]')
@@ -52,10 +76,14 @@ class Whatsapp :
 
     def send_message(self,message) :
         self.div = self.driver.find_element(By.XPATH,'//div[@aria-placeholder="Type a message"]')
-        pyperclip.copy(message)
+        self.div.click()
+        actions = ActionChains(self.driver)
+
+        #pyperclip.copy(message)
 
         print("ecrit")
-        self.div.send_keys(self.control_key,'v')
+        #self.div.send_keys(self.control_key,'v')
+        actions.send_keys(message).perform()
         self.div.send_keys(Keys.ENTER)
         time.sleep(1)
     
@@ -77,3 +105,6 @@ class Whatsapp :
         except Exception as e:
             print("Pas de message :",e)
             return None
+        
+    def quit(self) :
+        self.driver.quit()
