@@ -63,9 +63,7 @@ class Whatsapp :
         for x in range(len(phone)) :
             self.selec_contact.send_keys(phone[x])
         time.sleep(0.5)
-        
-        self.contact = self.driver.find_element(By.XPATH,'//div[@style="z-index: 0; transition: none; height: 72px; transform: translateY(72px);" and @role="listitem"]')
-        self.contact.click()
+        self.selec_contact.send_keys(Keys.ENTER)
 
         self.actual_contact = phone
         time.sleep(0.5)
