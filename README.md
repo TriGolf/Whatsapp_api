@@ -1,3 +1,6 @@
+> [!WARNING]
+> Whatsapp changent souvent leur interface web, ce qui peut causer le plantage du programme. J'essaie de le mettre à jour quand je peux mais cela reste une solution très instable
+
 # Whatsapp_api
 Une api pour whatsapp
 
